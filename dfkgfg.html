@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="requestNotificationPermission()">Request Notification Permission</button>
+
+    <script>
+      function requestNotificationPermission() {
+        // Check if the browser supports notifications
+        if (!('Notification' in window)) {
+          console.log('This browser does not support notifications');
+          return;
+        }
+
+        // Request permission for notifications
+        Notification.requestPermission().then(function (permission) {
+          if (permission === 'granted') {
+            // Create a new notification
+            var notification = new Notification('Title', {
+              body: 'This is the notification message'
+            });
+
+            // Handle notification click event
+            notification.onclick = function () {
+              // Do something when the notification is clicked
+              console.log('Notification clicked');
+            };
+          } else {
+            console.log('Notification permission denied');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
